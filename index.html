@@ -9,22 +9,22 @@
 </head>
 <body>
 
-    <section class="form">
-        <form class="wheatherForm">
-            <input type="text" autocomplete="off" name="" id="cityInput" class="cityInput" placeholder="search your city...." value="London">
-            <button type="submit" id="searchCityBtn" onclick="temperature()">search the city<i class="fa fa-search" aria-hidden="true" id="submitCity"></i></button>
+    <section class="myForm">
+        <form id="weatherForm">
+            <input type="text" autocomplete="off" id="cityInput" class="cityInput" placeholder="search your city...." value="London">
+            <button type="submit" id="searchCityBtn">Search your city.....<i class="fa fa-search" aria-hidden="true" id="submitCity"></i></button>
         </form>
     </section>
     
     <section class="weatherCard">
         <h2>Current weather</h2>
         <h3 id="city" class="city">Miami</h3>
-        <p id="temperature" class="temperature">60°F</p>
-        <p id="cloudCover" class="cloud-cover">Cloudy</p>
+        <p id="temperatureFarenheit" class="temperature">Temperature: 60°F</p>
+        <p id="cloudCover" class="cloud-cover">Cloudy cover:</p>
         <p class="humidity" id="humidity">Humidity: 75%</p>
-        <p class="weatherEmoji"></p>
+        <!-- <img src="" alt=""> -->
+        <p class="weatherIcon"> <img id="weatherIcon" src="" alt=""></p>
     </section>
-
 
     <script src="./js/app.js"></script>
 </body>

@@ -3,3 +3,9 @@
     padding: 0;
     box-sizing: border-box ;
 }
+
+/* MAKE FOR DEFAULT THE FIRST LETTER BE CAPITAL */
+
+.weatherCard {
+    display: none;
+}

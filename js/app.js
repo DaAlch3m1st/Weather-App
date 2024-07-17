@@ -1,107 +1,77 @@
-// my code below
-
-// const weatherForm = document.querySelector('#submitInput')
-// const cityInput = document.querySelector('#cityInput')
-// const weatherCard = document.querySelector('.weatherCard')
-
-// const city = document.getElementById('cityInput').value.toLowerCase();
-
-
-// async function temperature() {
-//   const apiKey = '6b055f484fb6fc59adad6b10963fef35';
-//   const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
-
-//   try{
-//     const response = await fetch(apiUrl);
-
-//     if (!response.ok) {
-//       throw new Error('Network response was not ok');
-//     }
-
-
-//     const data = await response.json();
-//     console.log(data);
-//     return data;
-//     // document.getElementById('humidity').textContent = data.list[0].main.humidity
-//     // const humidity = data.list.main.humidity;
-//     // console.log('Humidity:', humidity);
-
-//   } catch (error) {
-//     console.error('Error fetching data:', error);
-//   }
-// }
-// temperature()
-
-
-// https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}
-
-// Solve the issue of nth display in the web console
-// Solve the issue of nth display in the web console
-// Solve the issue of nth display in the web console
-// Solve the issue of nth display in the web console
-
-
-// Try to run the code on RunJs
-// Try to run the code on RunJs
-// Try to run the code on RunJs
-// Try to run the code on RunJs
-// Try to run the code on RunJs
-// Try to run the code on RunJs
-// Try to run the code on RunJs
-
-const weatherForm = document.querySelector('#weatherForm');
+// Select DOM elements
 const cityInput = document.querySelector('#cityInput');
+const searchCityBtn = document.querySelector('#searchCityBtn');
+const changeToCelsiusBtn = document.querySelector('#changeToCelsiusBtn');
+const changeToFarenheitBtn = document.querySelector('#changeToFarenheitBtn');
 
-weatherForm.addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form submission default behavior
-    temperature(); // Call the temperature function when the form is submitted
-});
-
-async function temperature() {
+// Function to fetch weather data from OpenWeather API
+async function fetchWeather() {
   try {
-    const city = cityInput.value.trim();
-    // const city = 'Belleville'
-    // const cityValue = city.value.trim();
-    const apiKey = '6b055f484fb6fc59adad6b10963fef35'
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`)
-
-    // console.log('Response received:', response);
+    const city = cityInput.value.trim(); // Get the input city name and trim any whitespace
+    const apiKey = '6b055f484fb6fc59adad6b10963fef35'; // Your API key
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`); // Fetch weather data
 
     if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Network response was not ok'); // Throw an error if the response is not okay
     }
 
-    const data = await response.json();
+    const data = await response.json(); // Parse the JSON data
+
     // Add weather icon URL
     const weatherIcon = data.list[0].weather[0].icon;
     const iconUrl = `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
-    
-   // Convert temperature from Kelvin to Fahrenheit
-    const kelvin = data.list[0].main.temp_max;
-    const num = (kelvin - 273.15) * 9/5 + 32;
-    const farenheit = Math.trunc(num);
 
+    // Store the temperature in Kelvin for later conversion
+    const kelvin = data.list[0].main.temp_max;
+
+    // Convert temperature from Kelvin to Fahrenheit
+    const fahrenheit = Math.trunc((kelvin - 273.15) * 9/5 + 32);
+
+    // Update DOM elements with fetched data
     document.getElementById('city').textContent = city;
-    document.getElementById('temperatureFarenheit').textContent = `Temperature: ${farenheit} F`;
+    document.getElementById('temperature').textContent = `Temperature: ${fahrenheit}°F`;
+    document.getElementById('temperature').dataset.kelvin = kelvin;  // Store Kelvin temperature in data attribute
     document.getElementById('cloudCover').textContent = `Cloud Cover: ${data.list[0].weather[0].description}`;
     document.getElementById('humidity').textContent = `Humidity: ${data.list[0].main.humidity}%`;
     document.getElementById('weatherIcon').src = iconUrl;
-    // document.getElementById('weatherEmoji').src = iconUrl;
     
-    
-    document.querySelector('.weatherCard').style.display = 'block';
+    document.querySelector('.weatherCard').style.display = 'block'; // Show the weather card
 
-    // const firstItem = data.list[0];
-    // const f = ''
-
-    // console.log(data)
   } catch (error) {
-    console.error('Error fetching data:', error);
-  } // This is the base of the code to start, I need to get the values of the json code
-};
-
-async function weatherToCelsius () {
-  
+    console.error('Error fetching data:', error); // Log any errors
+  }
 }
 
-// document.getElementById('searchCityBtn').addEventListener('click', temperature)
+// Function to convert temperature to Celsius
+function convertToCelsius() {
+  const temperatureElement = document.getElementById('temperature');
+  const kelvin = parseFloat(temperatureElement.dataset.kelvin); // Get the Kelvin temperature from the data attribute
+  const celsius = Math.trunc(kelvin - 273.15); // Convert Kelvin to Celsius
+  temperatureElement.textContent = `Temperature: ${celsius}°C`; // Update the temperature display
+}
+
+// Function to convert temperature to Fahrenheit when the user click the reset button
+function convertToFarenheit() {
+  const temperatureElement = document.getElementById('temperature');
+  const kelvin = parseFloat(temperatureElement.dataset.kelvin); // Get the Kelvin temperature from the data attribute
+  const fahrenheit = Math.trunc((kelvin - 273.15) * 9/5 + 32); // Convert Kelvin to Fahrenheit
+  temperatureElement.textContent = `Temperature: ${fahrenheit}°F`; // Update the temperature display
+}
+
+// Event listener for the search button
+searchCityBtn.addEventListener('click', function(event) {
+  event.preventDefault(); // Prevent form submission
+  fetchWeather(); // Fetch weather data
+});
+
+// Event listener for the Celsius conversion button
+changeToCelsiusBtn.addEventListener('click', function(event) {
+  event.preventDefault(); // Prevent form submission
+  convertToCelsius(); // Convert temperature to Celsius
+});
+
+// Event listener for the Fahrenheit conversion button
+changeToFarenheitBtn.addEventListener('click', function(event) {
+  event.preventDefault(); // Prevent form submission
+  convertToFarenheit(); // Convert temperature to Fahrenheit
+});

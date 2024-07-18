@@ -29,13 +29,14 @@ async function fetchWeather() {
 
     // Update DOM elements with fetched data
     document.getElementById('city').textContent = city;
-    document.getElementById('temperature').textContent = `Temperature: ${fahrenheit}°F`;
+    document.getElementById('temperature').textContent = `${fahrenheit}°F`;
     document.getElementById('temperature').dataset.kelvin = kelvin;  // Store Kelvin temperature in data attribute
-    document.getElementById('cloudCover').textContent = `Cloud Cover: ${data.list[0].weather[0].description}`;
+    document.getElementById('cloudCover').textContent = `${data.list[0].weather[0].description}`;
     document.getElementById('humidity').textContent = `Humidity: ${data.list[0].main.humidity}%`;
     document.getElementById('weatherIcon').src = iconUrl;
     
     document.querySelector('.weatherCard').style.display = 'block'; // Show the weather card
+    document.querySelector('.conversion-buttons').style.display = 'flex'; // show if you want to convert to celsius 
 
   } catch (error) {
     console.error('Error fetching data:', error); // Log any errors
@@ -47,7 +48,7 @@ function convertToCelsius() {
   const temperatureElement = document.getElementById('temperature');
   const kelvin = parseFloat(temperatureElement.dataset.kelvin); // Get the Kelvin temperature from the data attribute
   const celsius = Math.trunc(kelvin - 273.15); // Convert Kelvin to Celsius
-  temperatureElement.textContent = `Temperature: ${celsius}°C`; // Update the temperature display
+  temperatureElement.textContent = `${celsius}°C`; // Update the temperature display
 }
 
 // Function to convert temperature to Fahrenheit when the user click the reset button
@@ -55,7 +56,7 @@ function convertToFarenheit() {
   const temperatureElement = document.getElementById('temperature');
   const kelvin = parseFloat(temperatureElement.dataset.kelvin); // Get the Kelvin temperature from the data attribute
   const fahrenheit = Math.trunc((kelvin - 273.15) * 9/5 + 32); // Convert Kelvin to Fahrenheit
-  temperatureElement.textContent = `Temperature: ${fahrenheit}°F`; // Update the temperature display
+  temperatureElement.textContent = `${fahrenheit}°F`; // Update the temperature display
 }
 
 // Event listener for the search button
@@ -74,4 +75,11 @@ changeToCelsiusBtn.addEventListener('click', function(event) {
 changeToFarenheitBtn.addEventListener('click', function(event) {
   event.preventDefault(); // Prevent form submission
   convertToFarenheit(); // Convert temperature to Fahrenheit
+});
+
+document.getElementById('cityInput').addEventListener('input', function() {
+  let value = this.value;
+  if (value.length > 0) {
+      this.value = value.charAt(0).toUpperCase() + value.slice(1);
+  }
 });

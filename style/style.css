@@ -4,8 +4,112 @@
     box-sizing: border-box ;
 }
 
-/* MAKE FOR DEFAULT THE FIRST LETTER BE CAPITAL */
+body {
+    height: 100vh;
+    background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%);
+    /* background-color: #145494; */
+}
+
+
+
+.myForm {
+    width: 400px;
+    max-width: 100%;
+    margin: 0 auto;
+    
+}
+
+.input-button {
+    display: flex;
+    align-items: center; /* Vertically align items */
+}
+
+.city {
+    flex: 1; /* Expand input to fill available space */
+    /* Your other input styles */
+}
+
+
+input[type=text], select {
+    width: 100px;
+    margin: 8px 0;
+    border: none;
+    font-size: 24px;
+    border-bottom: 2px solid #111;
+    padding: 1rem 2rem;
+    width: 100%;
+    /* background-color: #424242; */
+    background: transparent;
+}
+
+
+/* Style the input elements on focus */
+input[type=text]:focus {
+    outline: none; /* Remove the default focus outline */
+    border-bottom: 2px solid #111; /* Ensure only bottom border is visible */
+}
+
+.search-city-btn {
+    background-color: #555555; /* Black */
+    border: none;
+    color: white;
+    padding: 1rem 2rem;
+    margin-left: 1px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#cityInput {
+    text-transform: capitalize;
+}
+
+.conversion-buttons {
+    display: none;
+    display: flex;
+    justify-content: center;
+    display: none;
+}
 
 .weatherCard {
-    display: none;
+    /* display: none; */
+    width: 100%;
+    background-image: url('image.png');
+    background-color: #cccccc; /* Used if the image is unavailable */
+    height: 100vh;
+    /* background: rgb(126,223,224);
+    background: linear-gradient(0deg, rgba(126,223,224,1) 46%, rgba(45,192,253,1) 100%); */
+    background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%);
+    color: #FFF7EF;
+}
+
+b {
+    color: #b2c8dc;
+    font-weight: bolder;
+}
+
+.city {
+    display: flex;
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 0px;
+    font-size: 48px;
+}
+
+.current-weather {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.temperature {
+    font-size: 40px;
+    font-weight: lighter;
+}
+
+.weather-condition {
+    margin-top: 24px;
+    display: flex;
+    gap: 16px;
 }

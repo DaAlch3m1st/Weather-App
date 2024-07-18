@@ -8,22 +8,46 @@
     <title>Weather App</title>
 </head>
 <body>
-
     <section class="myForm">
-        <input type="text" autocomplete="off" id="cityInput" class="cityInput" placeholder="Search your city...." value="London">
-        <button type="submit" id="searchCityBtn">Search the city<i class="fa fa-search" aria-hidden="true"></i></button>
+        <div class="input-button">
+            <input type="text" autocomplete="off" id="cityInput" class="cityInput" placeholder="Search the current weather in your city...." value="">
+            <button type="submit" id="searchCityBtn" class="search-city-btn" title="Search for weather in the city"><i class="fa fa-search" aria-hidden="true"></i></button>
+        </div>
     </section>
     
-    <section class="weatherCard">
-        <h2>Current weather</h2>
-        <h3 id="city" class="city">Miami</h3>
-        <p id="temperature" class="temperature">60°F</p>
-        <button id="changeToCelsiusBtn">Convert to Celsius</button>
-        <button id="changeToFarenheitBtn">Reset</button>
-        <p id="cloudCover" class="cloud-cover">Cloudy</p>
-        <p class="humidity" id="humidity">Humidity: 75%</p>
-        <img id="weatherIcon" alt="Weather Icon">
+    
+    <section class="conversion-buttons">
+        <button id="changeToCelsiusBtn" title="Convert temperature to Celsius">Celsius</button>
+        <div>or</div>
+        <button id="changeToFarenheitBtn" title="Convert temperature to Fahrenheit">Farenheit</button>
     </section>
+
+    <section class="weatherCard">
+        <div class="header">
+            <h3 id="city" class="city">Miami</h3>
+            <div class="current-weather">
+                <img id="weatherIcon" alt="Weather Icon">
+                <p id="temperature" class="temperature">60°F</p> 
+        </div>
+        <!-- <div class="conversion-buttons">
+            <button id="changeToCelsiusBtn" title="Convert temperature to Celsius">Celsius</button>
+            <button id="changeToFarenheitBtn" title="Convert temperature to Fahrenheit"><i class="fa-solid fa-power-off"></i></button>
+        </div> -->
+        <div class="weather-condition">
+            <p class="cloud-cover"><b>Cloud Cover:</b>
+            <p id="cloudCover" class="cloud-state">Cloudy</p>
+            </p>
+            <p class="humidity" id="humidity"><b>Humidity:</b> 75%</p>
+        </div>
+    </section>
+
+    <!-- <div class="clouds">
+        <img src="cloud1.png" style="--i:1;">
+        <img src="cloud2.png" style="--i:1;">
+        <img src="cloud3.png" style="--i:1;">
+        <img src="cloud4.png" style="--i:1;">
+        <img src="cloud5.png" style="--i:1;">
+    <div> -->
 
     <script src="./js/app.js"></script>
 </body>

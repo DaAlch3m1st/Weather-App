@@ -73,7 +73,7 @@ input[type=text]:focus {
 }
 
 .weatherCard {
-    /* display: none; */
+    display: none;
     width: 100%;
     background-image: url('image.png');
     background-color: #cccccc; /* Used if the image is unavailable */
